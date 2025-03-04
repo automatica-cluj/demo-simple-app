@@ -27,8 +27,14 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Extract tag name
-        id: extract_tag
-        run: echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV    
+        id: tag
+        run: |
+          if [[ $GITHUB_REF == refs/tags/* ]]; then
+            echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+            echo "INCLUDE_VERSION_TAG=true" >> $GITHUB_OUTPUT
+          else
+            echo "INCLUDE_VERSION_TAG=false" >> $GITHUB_OUTPUT
+          fi
       
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
