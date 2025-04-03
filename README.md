@@ -23,6 +23,30 @@ The formal release process follows these steps:
 4. Click "Publish Release" to finalize the process.
 5. Check the GitHub Actions tab to ensure the docker workflow has completed successfully and image as been succesfully generated.
 
+## 4. Run application using Docker image
+
+Change the version in `docker-compose.yaml` to the version you want to run and the user and repository to your own.
+
+```yaml  
+
+services:
+app:
+container_name: springboot-app
+image: ghcr.io/**automatica-cluj**/demo-simple-app:**v0.6-beta**
+```
+
+To run the application using docker compose:
+
+```
+docker compose up
+```
+
+Test the basic hell controller:
+
+```
+curl http://localhost:8080/hello
+```
+
 ## 4. References
 
 - https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry.
