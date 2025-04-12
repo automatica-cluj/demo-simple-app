@@ -3,7 +3,7 @@ version: '3.8'
 services:
   app:
     container_name: springboot-app
-    image: ghcr.io/automatica-cluj/demo-simple-app:v0.8-beta
+    image: ghcr.io/automatica-cluj/demo-simple-app:v0.9
     ports:
       - "8080:8080"
     environment:
@@ -11,6 +11,7 @@ services:
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
     depends_on:
       - db
     networks:
